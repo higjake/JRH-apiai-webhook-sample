@@ -38,11 +38,11 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "expertiseProfessionSearch":
         return {}
-    baseurl = "https://www.expertise.com/api/v1.0/directories/"
+    baseurl = "https://requestb.in/16op1y91?"
     url_query = makeQuery(req)
     if url_query is None:
         return {}
-    final_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    final_url = baseurl + urlencode({url_query}) + "&format=json"
     result = urlopen(final_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
