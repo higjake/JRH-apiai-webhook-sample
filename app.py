@@ -36,27 +36,29 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "yahooWeatherForecast":
+    if req.get("result").get("action") != "expertiseProfessionSearch":
         return {}
-    baseurl = "http://requestb.in/u4u6jcu4"
-    yql_query = makeYqlQuery(req)
-    if yql_query is None:
+    baseurl = "https://www.expertise.com/api/v1.0/directories/"
+    url_query = makeQuery(req)
+    if url_query is None:
         return {}
-    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
-    result = urlopen(yql_url).read()
+    final_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
+    result = urlopen(final_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
 
 
-def makeYqlQuery(req):
+def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
+    state = parameters.get("state")
     city = parameters.get("geo-city")
-    if city is None:
+    vert = parameters.get("profession")
+    if state is None:
         return None
-
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+    
+    return state + "/" + city + "/" + vert
 
 
 def makeWebhookResult(data):
