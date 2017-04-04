@@ -36,13 +36,13 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") != "expertiseProfessionSearch":
+    if req.get("result").get("action") != "yahooWeatherForecast":
         return {}
-    baseurl = "https://www.expertise.com/api/v1.0/directories/nc/charlotte/yoga-studios"
+    baseurl = "http://requestb.in/u4u6jcu4"
     yql_query = makeYqlQuery(req)
     if yql_query is None:
         return {}
-    yql_url = baseurl + urlencode({yql_query})
+    yql_url = baseurl + urlencode({'q': yql_query}) + "&format=json"
     result = urlopen(yql_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
