@@ -25,13 +25,12 @@ def webhook():
     return r
 def processRequest(req):
     if req.get("result").get("action") != "expertiseProfessionSearch":
-        return {
-            "speech": "sorry",
-            "displayText": "sorry",
-            # "data": data,
-            # "contextOut": [],
-            "source": "apiai-weather-webhook-sample"
-        }
+        return { 
+        "speech": "no match",
+        "displayText": "no match",
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample" }
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -56,9 +55,9 @@ def makeQuery(req):
 
 def makeWebhookResult(data):
     providers = data.get('providers')
-        if providers is None:
+    if providers is None:
         return {}
-
+    
     # print(json.dumps(item, indent=4))
     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
