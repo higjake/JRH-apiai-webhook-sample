@@ -25,12 +25,6 @@ def webhook():
     return r
 def processRequest(req):
     if req.get("result").get("action") = "expertiseProfessionSearch":
-        return { 
-        "speech": "Sorry",
-        "displayText": "Sorry",
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample" }
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
