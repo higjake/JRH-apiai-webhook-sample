@@ -31,17 +31,19 @@ def processRequest(req):
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample" }
-    baseurl = "https://www.expertise.com/api/v1.0/directories/"
-    url_query = makeQuery(req)
-    if url_query is None:
-        return {}
-    final_url = baseurl + url_query
-    #final_url = baseurl + urlencode({url_query})
-    #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
-    result = urlopen(final_url).read()
-    data = json.loads(result)
-    res = makeWebhookResult(data)
-    return res
+    else:
+        if req.get("result").get("action") = "expertiseProfessionSearch":
+            baseurl = "https://www.expertise.com/api/v1.0/directories/"
+            url_query = makeQuery(req)
+            if url_query is None:
+                return {}
+            final_url = baseurl + url_query
+            #final_url = baseurl + urlencode({url_query})
+            #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
+            result = urlopen(final_url).read()
+            data = json.loads(result)
+            res = makeWebhookResult(data)
+        return res
 def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
