@@ -26,8 +26,8 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "expertiseProfessionSearch":
         return { 
-        "speech": "no match",
-        "displayText": "no match",
+        "speech": providers[0].get('phone'),
+        "displayText": providers[0].get('phone'),
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample" }
