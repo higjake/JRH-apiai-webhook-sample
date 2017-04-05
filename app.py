@@ -34,8 +34,6 @@ def processRequest(req):
         data = json.loads(result)
         res = makeWebhookResult(data)
         return res
-    else: 
-        return {}
 def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
