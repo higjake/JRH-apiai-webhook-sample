@@ -53,7 +53,6 @@ def makeQuery(req):
     return state + "/" + city + "/" + vert
 
 def makeWebhookResult(data):
-    if req.get("result").get("action") = "expertiseProfessionSearch":
         providers = data.get('providers')
             if providers is None:
             return {}
@@ -68,23 +67,7 @@ def makeWebhookResult(data):
             # "data": data,
             # "contextOut": [],
             "source": "apiai-weather-webhook-sample"}
-    else:
-        if req.get("result").get("action") = "getNumber":
-            providers = data.get('providers')
-                if providers is None:
-                return {}
-
-            # print(json.dumps(item, indent=4))
-            speech = "The phone number for " providers[0].get('business_name') + " is " + providers[0].get['phone'] + "."
-            print("Response:")
-            print(speech)
-            return {
-                "speech": speech,
-                "displayText": speech,
-                # "data": data,
-                # "contextOut": [],
-                "source": "apiai-weather-webhook-sample"
-    }
+    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
