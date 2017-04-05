@@ -49,11 +49,11 @@ def makeQuery(req):
 
 def makeWebhookResult(data):
     providers = data.get('providers')
-    if metro is None:
+    if providers is None:
         return {}
     
     # print(json.dumps(item, indent=4))
-    speech = "The best" + providers.get('business_name[0]')
+    speech = "The best" + providers[0].get('business_name')
     print("Response:")
     print(speech)
     return {
