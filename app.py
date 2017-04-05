@@ -24,7 +24,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
-    if req.get("result").get("action") is None:
+    if req.get("result").get("action") = "expertiseProfessionSearch":
         return {
             "speech": "sorry",
             "displayText": "sorry",
