@@ -53,7 +53,7 @@ def makeWebhookResult(data):
         return {}
     
     # print(json.dumps(item, indent=4))
-    speech = "The best" + providers[0].get('business_name')
+    speech = "The best" + vert + providers[0].get('business_name')
     print("Response:")
     print(speech)
     return {
