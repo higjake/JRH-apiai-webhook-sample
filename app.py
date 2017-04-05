@@ -53,7 +53,7 @@ def makeWebhookResult(data):
         return {}
     
     # print(json.dumps(item, indent=4))
-    speech = "The best" + metro.get('name') + vert
+    speech = "The best" + metro.get('name')
     print("Response:")
     print(speech)
     return {
