@@ -26,8 +26,8 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") is None:
         return { 
-        "speech": "no match",
-        "displayText": "no match",
+        "speech": "Sorry, we couldn't match your request with any providers in your area. Please try another option.",
+        "displayText": "Sorry, we couldn't match your request with any providers in your area. Please try another option.",
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample" }
