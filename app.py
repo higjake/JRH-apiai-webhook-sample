@@ -24,26 +24,18 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
-    if req.get("result").get("action") is None:
-        return { 
-        "speech": "Sorry, we couldn't match your request with any providers in your area. Please try another option.",
-        "displayText": "Sorry, we couldn't match your request with any providers in your area. Please try another option.",
-        # "data": data,
-        # "contextOut": [],
-        "source": "apiai-weather-webhook-sample" }
-    else:
-        if req.get("result").get("action") = "expertiseProfessionSearch":
-            baseurl = "https://www.expertise.com/api/v1.0/directories/"
-            url_query = makeQuery(req)
-            final_url = baseurl + url_query
-            #final_url = baseurl + urlencode({url_query})
-            #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
-            result = urlopen(final_url).read()
-            data = json.loads(result)
-            res = makeWebhookResult(data)
-            return res
-        else: 
-            return {}
+    if req.get("result").get("action") = "expertiseProfessionSearch":
+        baseurl = "https://www.expertise.com/api/v1.0/directories/"
+        url_query = makeQuery(req)
+        final_url = baseurl + url_query
+        #final_url = baseurl + urlencode({url_query})
+        #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
+        result = urlopen(final_url).read()
+        data = json.loads(result)
+        res = makeWebhookResult(data)
+        return res
+    else: 
+        return {}
 def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
