@@ -19,8 +19,8 @@ def webhook():
     print(json.dumps(req, indent=4))
     res = processRequest(req)
     res = json.dumps(res, indent=4)
-   # print(res)
-   r = make_response(res)
+    # print(res)
+    r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
@@ -30,43 +30,39 @@ def processRequest(req):
     url_query = makeQuery(req)
     if url_query is None:
         return {}
-   #final_url = baseurl + urlencode({url_query})
-   final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
+    #final_url = baseurl + urlencode({url_query})
+    final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
 def makeQuery(req):
-   result = req.get("result")
-   parameters = result.get("parameters")
-   state = parameters.get("state")
-   city = parameters.get("city")
-   vert = parameters.get("profession")
-   if state is None:
+    result = req.get("result")
+    parameters = result.get("parameters")
+    state = parameters.get("state")
+    city = parameters.get("city")
+    vert = parameters.get("profession")
+    if state is None:
         return None
+    
     return state + "/" + city + "/" + vert
 
 def makeWebhookResult(data):
-    providers = data.get('providers')
-    if providers is None:
-        return {
-       "speech": "Not Today",
-       "displayText": "Not Today",
-       # "data": data,
-       # "contextOut": [],
-       "source": "apiai-weather-webhook-sample"
-   }
-# print(json.dumps(item, indent=4))
-   speech = "Today in" + providers.get('business_name')
+    metro = data.get('metro')
+    if metro is None:
+        return {}
+    
+    # print(json.dumps(item, indent=4))
+    speech = "The best" + metro.get('name') + vert
     print("Response:")
     print(speech)
     return {
-       "speech": speech,
-       "displayText": speech,
-       # "data": data,
-       # "contextOut": [],
-       "source": "apiai-weather-webhook-sample"
-   }
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
