@@ -24,7 +24,14 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
-    if req.get("result").get("action") = "expertiseProfessionSearch":
+    if req.get("result").get("action") is None:
+        return {
+            "speech": "test",
+            "displayText": "test",
+            # "data": data,
+            # "contextOut": [],
+            "source": "apiai-weather-webhook-sample"
+        }
         baseurl = "https://www.expertise.com/api/v1.0/directories/"
         url_query = makeQuery(req)
         final_url = baseurl + url_query
