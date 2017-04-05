@@ -30,10 +30,11 @@ def processRequest(req):
             "displayText": "test",
             # "data": data,
             # "contextOut": [],
-            "source": "apiai-weather-webhook-sample"
-        }
+            "source": "apiai-weather-webhook-sample"}
         baseurl = "https://www.expertise.com/api/v1.0/directories/"
         url_query = makeQuery(req)
+        if url_query is None:
+                 return {}
         final_url = baseurl + url_query
         #final_url = baseurl + urlencode({url_query})
         #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
