@@ -24,10 +24,10 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
-    if req.get("result").get("action") != "expertiseProfessionSearch":
+    if req.get("result").get("action") != "null":
         return { 
-        "speech": providers[0].get('phone'),
-        "displayText": providers[0].get('phone'),
+        "speech": "Sorry",
+        "displayText": "Sorry",
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample" }
