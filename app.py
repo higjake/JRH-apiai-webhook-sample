@@ -54,7 +54,7 @@ def makeQuery(req):
     return state + "/" + city + "/" + vert
 
 def makeWebhookResult(data):
-    if req.get("result").get("action") is "expertiseProfessionSearch":
+    if req.get("result").get("action") = "expertiseProfessionSearch":
         providers = data.get('providers')
             if providers is None:
             return {}
@@ -70,7 +70,7 @@ def makeWebhookResult(data):
             # "contextOut": [],
             "source": "apiai-weather-webhook-sample"
     else:
-        if req.get("result").get("action") is "getNumber":
+        if req.get("result").get("action") = "getNumber":
             providers = data.get('providers')
                 if providers is None:
                 return {}
