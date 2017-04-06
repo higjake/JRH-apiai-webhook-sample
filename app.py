@@ -47,12 +47,12 @@ def makeQuery(req):
     return state + "/" + city + "/" + vert
 
 def makeWebhookResult(data):
-    providers = data.get('providers')
-    if providers is None:
-        return {}
+    if req.get("result").get("action") = "expertiseProfessionSearch":
+        providers = data.get('providers')
+        if providers is None:
+            return {}
     
     # print(json.dumps(item, indent=4))
-    if req.get("result").get("action") = "expertiseProfessionSearch":
         speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
         print("Response:")
         print(speech)
