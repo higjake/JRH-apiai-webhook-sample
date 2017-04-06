@@ -33,9 +33,6 @@ def processRequest(req):
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
-    if req.get("result").get("action") = "expertiseProfessionSearch":
-        res = makeWebhookResult(data)
-        return res
     return {
         "speech": "fail",
         "displayText": "fail",
