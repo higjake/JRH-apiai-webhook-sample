@@ -33,8 +33,10 @@ def processRequest(req):
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data)
-    return res
+    if req.get("result").get("action") = "expertiseProfessionSearch":
+        res = makeWebhookResult(data)
+        return res
+    return {}
 def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
@@ -47,22 +49,21 @@ def makeQuery(req):
     return state + "/" + city + "/" + vert
 
 def makeWebhookResult(data):
-    if req.get("result").get("action") = "expertiseProfessionSearch":
-        providers = data.get('providers')
-        if providers is None:
-            return {}
+    providers = data.get('providers')
+    if providers is None:
+        return {}
     
     # print(json.dumps(item, indent=4))
-        speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
-        print("Response:")
-        print(speech)
-        return {
-            "speech": speech,
-            "displayText": speech,
-            # "data": data,
-            # "contextOut": [],
-            "source": "apiai-weather-webhook-sample"
-        }
+    speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
+    print("Response:")
+    print(speech)
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
