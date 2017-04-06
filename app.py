@@ -36,7 +36,13 @@ def processRequest(req):
     if req.get("result").get("action") = "expertiseProfessionSearch":
         res = makeWebhookResult(data)
         return res
-    return {}
+    return {
+        "speech": "fail",
+        "displayText": "fail",
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
 def makeQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
