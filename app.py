@@ -56,7 +56,7 @@ def makeQuery(req):
     parameters = result.get("parameters")
     state = parameters.get("state")
     city = parameters.get("city")
-    vert = parameters.get("profession")
+    vert = parameters.get("vertical")
     if state is None:
         return None
     
