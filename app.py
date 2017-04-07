@@ -10,6 +10,20 @@ import os
 from flask import Flask
 from flask import request
 from flask import make_response
+
+actionMap = {
+    'expertiseProfessionSearch': {
+        'speech': 'The top three providers in your area are %s, %s, and %s.',
+        'key': 'business_name',
+        'count': 3
+    },
+    'getNumber': {
+        'speech': 'The phone number for that dude or dudet is %s',
+        'key': 'phone',
+        'count': 1
+    }
+}
+
 # Flask app should start in global layout
 app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
@@ -24,6 +38,8 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
+    if req.get("result").get("action") != "expertiseProfessionSearch"
+        return {}
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -33,7 +49,7 @@ def processRequest(req):
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data)
+    res = makeWebhookResult(data, req.get('result').get('action'))
     return res
 def makeQuery(req):
     result = req.get("result")
@@ -46,13 +62,14 @@ def makeQuery(req):
     
     return state + "/" + city + "/" + vert
 
-def makeWebhookResult(data):
+def makeWebhookResult(data, action):
     providers = data.get('providers')
     if providers is None:
         return {}
     
     # print(json.dumps(item, indent=4))
-    speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
+    speech = actionMapping[action]['speech'] % [data.providers[i].get(actionMapping[action]['key']) for i in range(actionMapping[action]['count'])];
+#     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
     print(speech)
     return {
