@@ -38,8 +38,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 def processRequest(req):
-    if req.get("result").get("action") != "expertiseProfessionSearch"
-        return {}
+    action = req.get("result").get("action")
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -49,7 +48,7 @@ def processRequest(req):
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data, req.get('result').get('action'))
+    res = makeWebhookResult(data, action)
     return res
 def makeQuery(req):
     result = req.get("result")
