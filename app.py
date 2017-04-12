@@ -7,6 +7,7 @@ from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 import json
 import os
+import time
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -28,6 +29,7 @@ actionMap = {
 app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def webhook():
+    start = time.time()
     req = request.get_json(silent=True, force=True)
     print("Request:")
     print(json.dumps(req, indent=4))
@@ -36,6 +38,8 @@ def webhook():
     # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
+    end = time.time()
+    print('Duration: {:10.4f} seconds'.format(end - start))
     return r
 def processRequest(req):
     action = req.get("result").get("action")
