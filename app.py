@@ -43,7 +43,7 @@ def webhook():
     return r
 def processRequest(req):
     action = req.get("result").get("action")
-    if action != 'expertiseProfessionSearch':
+    if action = None:
         return {
         "speech": "idk",
         "displayText": "idk",
