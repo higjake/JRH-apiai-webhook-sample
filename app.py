@@ -14,13 +14,18 @@ from flask import make_response
 
 actionMap = {
     'expertiseProfessionSearch': {
-        'speech': 'The top three providers in your area are %s, %s, and %s.',
+        'speech': 'The first provider in your area is %s, %s, and %s. Do you want to hear more about any of these , or get the phone number?',
         'key': 'business_name',
         'count': 3
     },
     'getNumber': {
-        'speech': 'The phone number for that dude or dudet is %s',
+        'speech': 'The phone number for that business is %s. Thanks for using Expertise Assistant',
         'key': 'phone',
+        'count': 1
+    },
+    'getMoreInfo': {
+        'speech': '%s. Would you like to get the phone number?',
+        'key': 'snippet',
         'count': 1
     }
 }
