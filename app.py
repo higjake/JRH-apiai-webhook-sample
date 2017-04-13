@@ -13,12 +13,12 @@ from flask import request
 from flask import make_response
 
 actionMap = {
-    'getNumber': {
+    'expertiseProfessionSearch': {
         'speech': 'The top three providers in your area are %s, %s, and %s.',
         'key': 'business_name',
         'count': 3
     },
-    'expertiseProfessionSearch': {
+    'getNumber': {
         'speech': 'The phone number for that dude or dudet is %s',
         'key': 'phone',
         'count': 1
@@ -56,10 +56,10 @@ def processRequest(req):
     return res
 def makeQuery(req):
     result = req.get("result")
-    parameters = result.get("parameters")
-    state = parameters.get("state")
-    city = parameters.get("city")
-    vert = parameters.get("vertical")
+    contexts = result.get("contexts")
+    state = contexts.get("state")
+    city = contexts.get("city")
+    vert = contexts.get("vertical")
     if state is None:
         return None
     
