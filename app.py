@@ -57,9 +57,10 @@ def processRequest(req):
 def makeQuery(req):
     result = req.get("result")
     contexts = result.get("contexts")
-    state = contexts[0].get("state")
-    city = contexts[0].get("city")
-    vert = contexts[0].get("vertical")
+    parameters = contexts[0].get("parameters")
+    state = parameters.get("state")
+    city = parameters.get("city")
+    vert = parameters.get("vertical")
     if state is None:
         return None
     
