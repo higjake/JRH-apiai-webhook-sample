@@ -13,12 +13,12 @@ from flask import request
 from flask import make_response
 
 actionMap = {
-    'expertiseProfessionSearch': {
+    'getNumber': {
         'speech': 'The top three providers in your area are %s, %s, and %s.',
         'key': 'business_name',
         'count': 3
     },
-    'getNumber': {
+    'expertiseProfessionSearch': {
         'speech': 'The phone number for that dude or dudet is %s',
         'key': 'phone',
         'count': 1
