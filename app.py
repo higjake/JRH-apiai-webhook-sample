@@ -14,7 +14,7 @@ from flask import make_response
 
 actionMap = {
     'expertiseProfessionSearch': {
-        'speech': 'The first provider in your area is %s, %s, and %s. Do you want to hear more about any of these , or get the phone number?',
+        'speech': 'The top three providers in your area are %s,%s, and %s. Do you want to hear more about any of these , or get the phone number?',
         'key': 'business_name',
         'count': 3
     },
