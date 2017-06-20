@@ -84,18 +84,12 @@ def makeQuery(req):
 
 def makeWebhookResult(data, action, resultnumber):
     providers = data.get('providers')
-    if providers is None:
-        return {}
-    if action == 'nextResult':
-        reviewedcount = str(data.get('reviewed'))
-    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key1'])
-    print(reviewedcount)
+    reviewedcount = getReviewedCount(action, data, resultnumber)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    if action == 'nextResult':
-        reviewedcount = str(data.get('reviewed'))
-    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key1'])
+    reviewedcount = getReviewedCount(action, data, resultnumber)
+    print(reviewedcount)
     speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
     print(speech)
@@ -106,6 +100,12 @@ def makeWebhookResult(data, action, resultnumber):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
+
+def reviewedcount(action, data, resultnumber):
+    if action == 'nextResult':
+        return str(data.get('reviewed'))
+    return providers[int(resultnumber)].get(actionMap[action]['key1'])
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
