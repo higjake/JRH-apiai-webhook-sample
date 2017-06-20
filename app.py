@@ -88,6 +88,7 @@ def makeWebhookResult(data, action, resultnumber):
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
+    reviewedcount = str(data.get('reviewed'))
     speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[0].get('business_name') + '. Would you like the phone number or website, or to hear our next result?';
     print("Response:")
     print(speech)
