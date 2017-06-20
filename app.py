@@ -25,7 +25,8 @@ actionMap = {
         'speech0a': 'The phone number for ',
         'speech0b': ' is ',
         'transition': ' Would you like the website, or to hear our next option?',
-        'key': 'phone'
+        'key1': ''providers')[resultnumber].get('business_name'',
+        'key2': 'phone'
     },
     'getWebsite': {
         'speech': '%s. Would you like to get the phone number?',
