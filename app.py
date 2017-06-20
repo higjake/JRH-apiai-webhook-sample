@@ -49,7 +49,8 @@ def webhook():
     return r
 def processRequest(req):
     action = req.get("result").get("action")
-    resultnumber = req.get("result").get("contexts")[1].name
+    contexts = req.get("result").get("contexts")
+    requestnumber = contexts[1].get("name")
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -80,7 +81,7 @@ def makeWebhookResult(data, action, resultnumber):
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    speech = actionMap[actionMap]['speech1'];
+    speech = actionMap[action]['speech1'];
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
     print(resultnumber)
