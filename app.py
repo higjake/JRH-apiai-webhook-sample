@@ -20,7 +20,7 @@ actionMap = {
         'transition': '. Would you like the phone number or website, or want to hear our next recommendation?',
         'key': 'business_name'
     },
-    'getNumber': {
+    'phoneNumber': {
         'speech0a': 'The phone number for ',
         'speech0b': ' is ',
         'transition': ' Would you like the website, or to hear our next option?',
