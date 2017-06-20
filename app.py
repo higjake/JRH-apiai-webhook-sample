@@ -99,8 +99,8 @@ def processRequest(req):
     contexts = req.get("result").get("contexts")
 #     resultnumber = contexts[2].get("name")
     for context in contexts:
-        print(context.name)
-    print(resultnumber)
+        print(context["name"])
+#     print(resultnumber)
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -127,17 +127,17 @@ def makeQuery(req):
 
 def makeWebhookResult(data, action, resultnumber):
     providers = data.get('providers')
-    actionsplit = action.split("-")
-    actionname = actionsplit[0]
-    resultnumber = actionsplit[1]
-    print(actionsplit)
-    reviewedcount = getReviewedCount(actionname, data, resultnumber)
+#     actionsplit = action.split("-")
+#     actionname = actionsplit[0]
+#     resultnumber = actionsplit[1]
+#     print(actionsplit)
+    reviewedcount = getReviewedCount(action, data, resultnumber)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    reviewedcount = getReviewedCount(actionname, data, resultnumber)
+    reviewedcount = getReviewedCount(action, data, resultnumber)
     print(reviewedcount)
-    speech = actionMap[actionname]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[actionname]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
+    speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
     print(speech)
     return {
