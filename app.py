@@ -15,7 +15,7 @@ from flask import make_response
 actionMap = {
     'nextResult': {
         'speech1': 'Our top provider in your area is ',
-        'speech1': 'Our second best provider in your area is ',
+        'speech2': 'Our second best provider in your area is ',
         'key': 'business_name',
         'count': 3
     },
@@ -51,6 +51,7 @@ def processRequest(req):
     action = req.get("result").get("action")
     contexts = req.get("result").get("contexts")
     resultnumber = contexts[1].get("name")
+    print(resultnumber)
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -84,7 +85,6 @@ def makeWebhookResult(data, action, resultnumber):
     speech = actionMap[action]['speech1'];
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
-    print(resultnumber)
     print(speech)
     return {
         "speech": speech,
