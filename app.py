@@ -97,10 +97,8 @@ def webhook():
 def processRequest(req):
     action = req.get("result").get("action")
     contexts = req.get("result").get("contexts")
-#     resultnumber = contexts[2].get("name")
-    for context in contexts:
-        print(context["name"])
-#     print(resultnumber)
+    resultnumber = getResultNumber(contexts)
+    print(resultnumber)
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -152,6 +150,14 @@ def getReviewedCount(action, data, resultnumber):
     if action == 'nextResult':
         return str(data.get('reviewed'))
     return data.get('providers')[int(resultnumber)].get(actionMap[action]['key1'])
+
+def getResultNumber(contexts):
+    for context in contexts:
+        if context["name"] == '0'
+            return context["name"]
+        return "fail"
+
+
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
