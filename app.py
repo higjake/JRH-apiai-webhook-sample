@@ -153,7 +153,7 @@ def getReviewedCount(action, data, resultnumber):
 
 def getResultNumber(contexts):
     for context in contexts:
-        if context["name"] == '0':
+        if context["name"] in ['0','1','2','3','4','5','6','7']:
             return context["name"]
 
 if __name__ == '__main__':
