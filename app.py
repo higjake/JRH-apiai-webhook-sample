@@ -81,7 +81,7 @@ def makeWebhookResult(data, action, resultnumber):
     providers = data.get('providers')
     if providers is None:
         return {}
-    reviewedcount = data.get('reviewed')
+    reviewedcount = str(data.get('reviewed'))
     if reviewedcount is None:
         return {}
     print(reviewedcount)
