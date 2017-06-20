@@ -14,21 +14,21 @@ from flask import make_response
 
 actionMap = {
     'nextResult': {
-        'speech1a': 'We have identified the top 8 results after looking at ',
-        'speech1b': ' businesses in your area. Our top recommended provider is ',
-        'speech2': 'Our second best provider in your area is ',
+        'speech0a': 'We have identified the top 8 results after looking at ',
+        'speech0b': ' businesses in your area. Our top recommended provider is ',
+        'speech1': 'Our second best provider in your area is ',
         'transition': '. Would you like the phone number or website, or want to hear our next recommendation?',
         'key': 'business_name'
     },
     'getNumber': {
-        'speech1a': 'The phone number for ',
-        'speech1b': ' is ',
+        'speech0a': 'The phone number for ',
+        'speech0b': ' is ',
         'transition': ' Would you like the website, or to hear our next option?',
         'key': 'phone'
     },
     'getWebsite': {
         'speech': '%s. Would you like to get the phone number?',
-        'key': 'website',
+        'key': 'website'
     }
 }
 
