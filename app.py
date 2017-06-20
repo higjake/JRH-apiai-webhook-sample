@@ -101,7 +101,7 @@ def makeWebhookResult(data, action, resultnumber):
         "source": "apiai-weather-webhook-sample"
     }
 
-def reviewedcount(action, data, resultnumber):
+def getReviewedCount(action, data, resultnumber):
     if action == 'nextResult':
         return str(data.get('reviewed'))
     return providers[int(resultnumber)].get(actionMap[action]['key1'])
