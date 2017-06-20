@@ -17,7 +17,7 @@ actionMap = {
         'speech1a': 'We have identified the top 8 results after looking at ',
         'speech1b': ' businesses in your area. Our top recommended provider is ',
         'speech2': 'Our second best provider in your area is ',
-        'transition': ',
+        'transition': '. Would you like the phone number or website, or want to hear our next recommendation?',
         'key': 'business_name'
     },
     'getNumber': {
