@@ -155,9 +155,6 @@ def getResultNumber(contexts):
     for context in contexts:
         if context["name"] == '0':
             return context["name"]
-        return "fail"
-
-
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
