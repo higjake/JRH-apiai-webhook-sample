@@ -104,7 +104,7 @@ def makeWebhookResult(data, action, resultnumber):
 def getReviewedCount(action, data, resultnumber):
     if action == 'nextResult':
         return str(data.get('reviewed'))
-    return providers[int(resultnumber)].get(actionMap[action]['key1'])
+    return data.get('providers')[int(resultnumber)].get(actionMap[action]['key1'])
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
