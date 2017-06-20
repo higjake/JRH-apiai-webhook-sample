@@ -14,7 +14,8 @@ from flask import make_response
 
 actionMap = {
     'nextResult': {
-        'speech1': 'Our top provider in your area is ',
+        'speech1a': 'We have identified the top 8 results after looking at ',
+        'speech1b': ' businesses in your area. Our top recommended provider is ',
         'speech2': 'Our second best provider in your area is ',
         'key': 'business_name',
         'count': 3
@@ -83,7 +84,7 @@ def makeWebhookResult(data, action, resultnumber):
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    speech = actionMap[action]['speech'+ resultnumber] + providers[0].get('business_name') + '. Would you like the phone number or website, or to hear our next result?';
+    speech = actionMap[action]['speech'+ resultnumber + 'a'] + actionMap[action]['speech'+ resultnumber + 'b'] + providers[0].get('business_name') + '. Would you like the phone number or website, or to hear our next result?';
     print("Response:")
     print(speech)
     return {
