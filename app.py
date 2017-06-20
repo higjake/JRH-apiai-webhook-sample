@@ -15,7 +15,7 @@ from flask import make_response
 actionMap = {
     'nextResult': {
         'speech1': 'Our top provider in your area is ',
-        'speech1': 'Our second best provider in your area is '
+        'speech1': 'Our second best provider in your area is ',
         'key': 'business_name',
         'count': 3
     },
