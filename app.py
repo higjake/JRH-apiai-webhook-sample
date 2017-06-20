@@ -13,17 +13,18 @@ from flask import request
 from flask import make_response
 
 actionMap = {
-    'expertiseProfessionSearch': {
-        'speech': 'The top three providers in your area are %s,%s, and %s. Do you want to hear more about any of these , or get the phone number?',
+    'nextResult': {
+        'speech1': 'Our top provider in your area is ',
+        'speech1': 'Our second best provider in your area is '
         'key': 'business_name',
         'count': 3
     },
     'getNumber': {
-        'speech': 'The phone number for that business is %s. Thanks for using Expertise Assistant',
+        'speech': 'The phone number for that business is ',
         'key': 'phone',
         'count': 1
     },
-    'getMoreInfo': {
+    'getWebsite': {
         'speech': '%s. Would you like to get the phone number?',
         'key': 'snippet',
         'count': 1
@@ -48,6 +49,7 @@ def webhook():
     return r
 def processRequest(req):
     action = req.get("result").get("action")
+    resultnumber = req.get("result").get("contexts")[1].name
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
@@ -71,7 +73,7 @@ def makeQuery(req):
     
     return state + "/" + city + "/" + vert
 
-def makeWebhookResult(data, action):
+def makeWebhookResult(data, action, resultnumber):
     providers = data.get('providers')
     if providers is None:
         return {}
@@ -81,6 +83,7 @@ def makeWebhookResult(data, action):
     speech = actionMap[action]['speech'] % tuple([providers[i].get(actionMap[action]['key']) for i in range(actionMap[action]['count'])]);
 #     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
+    print(resultnumber)
     print(speech)
     return {
         "speech": speech,
