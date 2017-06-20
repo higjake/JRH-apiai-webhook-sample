@@ -153,7 +153,7 @@ def getReviewedCount(action, data, resultnumber):
 
 def getResultNumber(contexts):
     for context in contexts:
-        if context["name"] == '0'
+        if context["name"] == '0':
             return context["name"]
         return "fail"
 
