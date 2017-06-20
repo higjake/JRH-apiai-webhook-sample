@@ -24,14 +24,14 @@ actionMap = {
     'phoneNumber': {
         'speech0a': 'The phone number for ',
         'speech0b': ' is ',
-        'transition': ' Would you like the website, or to hear our next option?',
+        'transition': '. Would you like the website, or to hear our next option?',
         'key1': 'business_name',
         'key2': 'phone'
     },
     'getWebsite': {
         'speech0a': 'The website for ',
         'speech0b': ' is ',
-        'transition': ' Would you like the phone number, or to hear our next option?',
+        'transition': '. Would you like the phone number, or to hear our next option?',
         'key1': 'business_name',
         'key2': 'website'
     },
