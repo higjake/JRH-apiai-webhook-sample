@@ -18,7 +18,8 @@ actionMap = {
         'speech0b': ' businesses in your area. Our top recommended provider is ',
         'speech1': 'Our second best provider in your area is ',
         'transition': '. Would you like the phone number or website, or want to hear our next recommendation?',
-        'key': 'business_name'
+        'key1': 'reviewed',
+        'key2': 'business_name'
     },
     'phoneNumber': {
         'speech0a': 'The phone number for ',
@@ -89,7 +90,7 @@ def makeWebhookResult(data, action, resultnumber):
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
     reviewedcount = str(data.get('reviewed'))
-    speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key']) + actionMap[action]['transition'];
+    speech = actionMap[action]['speech'+ resultnumber + 'a'] + data.get(actionMap[action]['key1']) + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
     print(speech)
     return {
