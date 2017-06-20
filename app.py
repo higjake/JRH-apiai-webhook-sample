@@ -50,13 +50,14 @@ def webhook():
 def processRequest(req):
     action = req.get("result").get("action")
     contexts = req.get("result").get("contexts")
-    resultnumber = contexts[1].get("name")
+    resultnumber = contexts[0].get("name")
     print(resultnumber)
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
         return {}
     final_url = baseurl + url_query
+    print(final_url)
     #final_url = baseurl + urlencode({url_query})
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
@@ -83,7 +84,6 @@ def makeWebhookResult(data, action, resultnumber):
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
     speech = actionMap[action]['speech1'];
-#     speech = "The top three providers in your area are " + providers[0].get('business_name') + ", " + providers[1].get('business_name') + ", and " + providers[2].get('business_name') + "." 
     print("Response:")
     print(speech)
     return {
