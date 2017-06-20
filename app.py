@@ -51,7 +51,7 @@ def webhook():
 def processRequest(req):
     action = req.get("result").get("action")
     contexts = req.get("result").get("contexts")
-    resultnumber = contexts[0].get("name")
+    resultnumber = contexts[1].get("name")
     print(resultnumber)
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
