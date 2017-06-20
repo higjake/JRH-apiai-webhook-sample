@@ -25,13 +25,16 @@ actionMap = {
         'speech0a': 'The phone number for ',
         'speech0b': ' is ',
         'transition': ' Would you like the website, or to hear our next option?',
-        'key1': '',
+        'key1': 'business_name',
         'key2': 'phone'
     },
-    'getWebsite': {
-        'speech': '%s. Would you like to get the phone number?',
-        'key': 'website'
-    }
+    'phoneNumber': {
+        'speech0a': 'The website for ',
+        'speech0b': ' is ',
+        'transition': ' Would you like the phone number, or to hear our next option?',
+        'key1': 'business_name',
+        'key2': 'website'
+    },
 }
 
 # Flask app should start in global layout
@@ -85,14 +88,14 @@ def makeWebhookResult(data, action, resultnumber):
         return {}
     if action == 'nextResult':
         reviewedcount = str(data.get('reviewed'))
-    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key2'])
+    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key1'])
     print(reviewedcount)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
     if action == 'nextResult':
         reviewedcount = str(data.get('reviewed'))
-    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key2'])
+    reviewedcount = providers[int(resultnumber)].get(actionMap[action]['key1'])
     speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
     print(speech)
