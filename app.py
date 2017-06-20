@@ -22,10 +22,10 @@ actionMap = {
         'key2': 'business_name'
     },
     'phoneNumber': {
-        'speech0a': 'The phone number for ',
+        'speech0a': 'The phone number for the business',
         'speech0b': ' is ',
         'transition': ' Would you like the website, or to hear our next option?',
-        'key1': ''providers')[resultnumber].get('business_name'',
+        'key1': '',
         'key2': 'phone'
     },
     'getWebsite': {
@@ -84,14 +84,16 @@ def makeWebhookResult(data, action, resultnumber):
     if providers is None:
         return {}
     reviewedcount = str(data.get('reviewed'))
-    if reviewedcount is None:
+    if action != 'nextResult':
         return {}
     print(reviewedcount)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
     reviewedcount = str(data.get('reviewed'))
-    speech = actionMap[action]['speech'+ resultnumber + 'a'] + str(data.get(actionMap[action]['key1'])) + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
+    if action != 'nextResult':
+        return {}
+    speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
     print(speech)
     return {
