@@ -50,7 +50,7 @@ def webhook():
 def processRequest(req):
     action = req.get("result").get("action")
     contexts = req.get("result").get("contexts")
-    requestnumber = contexts[1].get("name")
+    resultnumber = contexts[1].get("name")
     baseurl = "https://www.expertise.com/api/v1.0/directories/"
     url_query = makeQuery(req)
     if url_query is None:
