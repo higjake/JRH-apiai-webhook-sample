@@ -28,7 +28,7 @@ actionMap = {
         'key1': 'business_name',
         'key2': 'phone'
     },
-    'phoneNumber': {
+    'getWebsite': {
         'speech0a': 'The website for ',
         'speech0b': ' is ',
         'transition': ' Would you like the phone number, or to hear our next option?',
