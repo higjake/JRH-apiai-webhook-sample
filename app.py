@@ -84,10 +84,11 @@ def makeWebhookResult(data, action, resultnumber):
     reviewedcount = data.get('reviewed')
     if reviewedcount is None:
         return {}
+    print(reviewedcount)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[0].get('business_name') + '. Would you like the phone number or website, or to hear our next result?';
+    speech = actionMap[action]['speech'+ resultnumber + 'a'] + actionMap[action]['speech'+ resultnumber + 'b'] + providers[0].get('business_name') + '. Would you like the phone number or website, or to hear our next result?';
     print("Response:")
     print(speech)
     return {
