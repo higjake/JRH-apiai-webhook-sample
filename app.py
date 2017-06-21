@@ -16,20 +16,20 @@ actionMap = {
     'nextResult': {
         'speech0a': 'We have identified the top 8 results after looking at ',
         'speech0b': ' businesses in your area. Our top recommended provider is ',
-        'speech1a': 'After looking at ',
-        'speech1b': ' options in your area, our second-best recommended provider is ',
-        'speech2a': 'After looking at ',
-        'speech2b': ' options in your area, our third-best recommended provider is ',
-        'speech3a': 'After looking at ',
-        'speech3b': ' options in your area, our fourth-best recommended provider is ',
-        'speech4a': 'After looking at ',
-        'speech4b': ' options in your area, our fifth-best recommended provider is ',
-        'speech5a': 'After looking at ',
-        'speech5b': ' options in your area, our sixth-best recommended provider is ',
-        'speech6a': 'After looking at ',
-        'speech6b': ' options in your area, our seventh-best recommended provider is ',
-        'speech7a': 'After looking at ',
-        'speech7b': ' options in your area, our eighth and final recommended provider is ',
+        'speech1a': 'Our second-best recommended provider in ',
+        'speech1b': ' is ',
+        'speech2a': 'Our second-best recommended provider in ',
+        'speech2b': ' is ',
+        'speech3a': 'Our second-best recommended provider in ',
+        'speech3b': ' is ',
+        'speech4a': 'Our second-best recommended provider in ',
+        'speech4b': ' is ',
+        'speech5a': 'Our second-best recommended provider in ',
+        'speech5b': ' is ',
+        'speech6a': 'Our second-best recommended provider in ',
+        'speech6b': ' is ',
+        'speech7a': 'Our second-best recommended provider in ',
+        'speech7b': ' is ',
         'transition': '. Would you like the phone number or website, or want to hear our next recommendation?',
         'key1': 'reviewed',
         'key2': 'business_name'
@@ -109,7 +109,7 @@ def processRequest(req):
     #final_url = "https://www.expertise.com/api/v1.0/directories/ga/atlanta/flooring"
     result = urlopen(final_url).read()
     data = json.loads(result)
-    res = makeWebhookResult(data, action, resultnumber)
+    res = makeWebhookResult(data, action, resultnumber, req)
     return res
 def makeQuery(req):
     result = req.get("result")
@@ -123,17 +123,17 @@ def makeQuery(req):
     
     return state + "/" + city + "/" + vert
 
-def makeWebhookResult(data, action, resultnumber):
+def makeWebhookResult(data, action, resultnumber, req):
     providers = data.get('providers')
 #     actionsplit = action.split("-")
 #     actionname = actionsplit[0]
 #     resultnumber = actionsplit[1]
 #     print(actionsplit)
-    reviewedcount = getReviewedCount(action, data, resultnumber)
+    reviewedcount = getReviewedCount(action, data, resultnumber, req)
     
     # print(json.dumps(item, indent=4))
     providers = data.get('providers') # Adding this line as a sanity check
-    reviewedcount = getReviewedCount(action, data, resultnumber)
+    reviewedcount = getReviewedCount(action, data, resultnumber, req)
     print(reviewedcount)
     speech = actionMap[action]['speech'+ resultnumber + 'a'] + reviewedcount + actionMap[action]['speech'+ resultnumber + 'b'] + providers[int(resultnumber)].get(actionMap[action]['key2']) + actionMap[action]['transition'];
     print("Response:")
@@ -146,9 +146,15 @@ def makeWebhookResult(data, action, resultnumber):
         "source": "apiai-weather-webhook-sample"
     }
 
-def getReviewedCount(action, data, resultnumber):
-    if action == 'nextResult':
+def getReviewedCount(action, data, resultnumber, req):
+    parameters = req.get('result').get('contexts')[0].get('parameters')
+    state = parameters.get('state')
+    city = parameters.get('city')
+    
+    if (action == 'nextResult' and resultnumber == '0'):
         return str(data.get('reviewed'))
+    elif (action == 'nextResult' and resultnumber != '0'):
+        return city + state
     return data.get('providers')[int(resultnumber)].get(actionMap[action]['key1'])
 
 def getResultNumber(contexts):
