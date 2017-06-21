@@ -154,7 +154,7 @@ def getReviewedCount(action, data, resultnumber, req):
     if (action == 'nextResult' and resultnumber == '0'):
         return str(data.get('reviewed'))
     elif (action == 'nextResult' and resultnumber != '0'):
-        return city + state
+        return city
     return data.get('providers')[int(resultnumber)].get(actionMap[action]['key1'])
 
 def getResultNumber(contexts):
